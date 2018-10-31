@@ -178,7 +178,7 @@ class Lista_D
          if (m_pHead->m_tiempo==0) m_pHead=m_pHead->m_pSig;
          usleep(1000000);
        }}
-      bool AddE(T d,T p)
+      bool AddE(T d,T p,T x=0)
       {
             Nodo<T>  ** q;
             if(find(d,q)){
@@ -210,6 +210,7 @@ int main(int argc, char const *argv[]) {
   Lista_D.insertar(8,6);
   Lista_D.corto();
   Lista_D.restar();*/
+
   RenderWindow window(VideoMode(900,480),"Sistemas Operativos :D");
   window.setVerticalSyncEnabled(true);
   Menu menu(window.getSize().x,window.getSize().y);
@@ -286,7 +287,7 @@ int main(int argc, char const *argv[]) {
                     //window.clear();
                     //window.display();
 
-                    Lista_D.AddE(1,7);
+                    Lista_D.AddE(1,7,2);
                     Lista_D.AddE(5,6);
                     Lista_D.AddE(3,4);
                     Lista_D.AddE(8,9);
@@ -295,6 +296,7 @@ int main(int argc, char const *argv[]) {
                     Lista_D.AddE(6,6);
                     //Lista_D.AddE(9,2);
                     Lista_D.tiempo(1);
+                    //window.clear();
                     window.draw(Lista_D.getShape());
                     window.draw(Lista_D.getShape1());
                     window.draw(Lista_D.getShape2());
@@ -304,6 +306,7 @@ int main(int argc, char const *argv[]) {
                     //window.draw(Lista_D.getShape6());
                     //window.draw(Lista_D.top->sig->get_Shape());
                     //window.draw(Lista_D.getShape());
+                    usleep(1000000);
                     window.display();
 
                     break;

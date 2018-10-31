@@ -15,7 +15,7 @@ Menu::Menu(float width,float height){
 
   menu[1].setFont(font);
   menu[1].setFillColor(sf::Color::White);
-  menu[1].setString("Quantum");
+  menu[1].setString("Mostrar");
   menu[1].setCharacterSize(42);
   menu[1].setPosition(Vector2f(50,225));
 
