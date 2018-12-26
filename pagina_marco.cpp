@@ -20,11 +20,13 @@ class Pagina{
 private:
   Marco<T> *m_pHead;
   Marco<T> *m_pTail;
-  T tam_total;
+
 public:
+  T tam_total;
   Pagina(){
     m_pHead=NULL;
     m_pTail=NULL;
+    tam_total=0;
   }
   bool isEmpty();
   bool find_R(T d,Marco<T> *&p);
@@ -36,6 +38,8 @@ public:
   bool add_E(T d);
   void add_R_again(T d,T e,string f,Marco<T> *&p);
   void add_again(T d,T e,string f);
+  void print_R_again();
+  void print_RR(int R);
 };
 template <typename T>
 bool Pagina<T>::isEmpty(){
@@ -68,6 +72,7 @@ void Pagina<T>::add_R(T d,T e,string f,Marco<T> *&p){
 template <typename T>
 void Pagina<T>::add_R_again(T d,T e,string f,Marco<T> *&p){
   if(!p){
+    tam_total+=d/e;
     if(p->activar==false){
       p->activar=true;
       T tmp=d;
@@ -75,6 +80,7 @@ void Pagina<T>::add_R_again(T d,T e,string f,Marco<T> *&p){
         T tmp=d-e;
         d=tmp;
         p=new Marco<T>(tmp,e,f);
+        tam_total+=d/e;
         return add_R(d,e,f,p->m_pSig);
       }
     }
@@ -102,21 +108,47 @@ void Pagina<T>::print_R(){
     //}else{
     if(p->m_dato==0){
       cout<<p->name_P<<"\t"<<p->m_dato<<"\t\t"<<"0"<<"\t"<<p->capacidad<<endl;//}
-    }else{
-    cout<<p->name_P<<"\t"<<p->m_dato<<"\t\t"<<p->capacidad<<"\t"<<p->capacidad<<endl;}
+    }//else{
+    //cout<<p->name_P<<"\t"<<p->m_dato<<"\t\t"<<p->capacidad<<"\t"<<p->capacidad<<endl;}
     p=p->m_pSig;
 
   }
 }
+template <typename T>
+void Pagina<T>::print_RR(int x){
+  Marco<T> *p=m_pHead;
+  //cout<<"PROCESOS"<<"\t"<<"Disminucion"<<"\t"<<"Bytes"<<"\t"<<"TAMAÑO"<<endl;
+  while(p!=NULL && tam_total<x){
+    //if(p->m_dato==0){
+      cout<<p->name_P<<"\t"<<p->m_dato<<"\t\t"<<"0"<<"\t"<<p->capacidad<<endl;
+    x++;
+  //}
+}
+}
+template <typename T>
+void Pagina<T>::print_R_again(){
+  Marco<T> *p=m_pHead;
+  cout<<"PROCESOS"<<"\t"<<"Disminucion"<<"\t"<<"Bytes"<<"\t"<<"TAMAÑO"<<endl;
+  while(p!=NULL){
+    //if(p->m_dato<0)
+    cout<<p->name_P<<"\t"<<p->m_dato<<"\t\t"<<p->capacidad<<"\t"<<p->capacidad<<endl;
+    p=p->m_pSig;
+  }
+}
 
 int main(int argc, char const *argv[]) {
-  Pagina<int> Registro;
-  for(int i=0;i<30;i++){
-    Registro.add(0,3,"Proceso NULL");
+  Pagina<int> Memoria;
+  int tam=15;
+  for(int i=0;i<tam;i++){
+    Memoria.add(0,3,"Proceso NULL");
   }
-  Registro.add_again(6,3,"Proceso 1");
-  Registro.add_again(9,3,"Proceso 2");
-  Registro.add_again(12,3,"Proceso 3");
-  Registro.print_R();
+  Memoria.print_R();
+  cout<<endl;
+  Memoria.add_again(6,3,"Proceso 1");
+  Memoria.add_again(9,3,"Proceso 2");
+  Memoria.add_again(12,3,"Proceso 3");
+  Memoria.print_R_again();
+  Memoria.print_RR(Memoria.tam_total );
+  cout<<Memoria.tam_total;
   return 0;
 }

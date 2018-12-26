@@ -1,7 +1,6 @@
 #include <time.h>
-#include "persona.h"
 #include <unistd.h>
-
+#include <iostream>
 using namespace std;
 
 template<class T>
@@ -36,7 +35,7 @@ class Lista_D
          return !m_pHead;
        }
 
-       bool AddDato(T d){
+       void AddDato(T d){
          Nodo<T> * pNuevo = new Nodo<T>(d);
        }
 
@@ -139,10 +138,10 @@ class Lista_D
             return true;
         }
 };
-int main()
-{
+
+void prioridad(){
+      cout<<"\t:::::::::PROCESOSs:::::::::\n\n";
       Lista_D <int>  A;
-      //int pros_new=rand()%10;
       int menu=5;
       int pros, prio;
       while(menu!=4){
@@ -151,12 +150,19 @@ int main()
           //A.print_R(A.m_pHead);
         //}
         //cout<<"1. Ingresa proceso: "<<endl;
+        cout<<"\t1.- Añadir Proceso: "<<endl;
+        cout<<"\t2.- Mostrar Procesos: "<<endl;
+        cout<<"\t3.- Mostrar tiempos: "<<endl;
+        cout<<"\t4.- Volver: "<<endl;
+
         if (A.m_pHead==0) cout<<"No procesos"<<endl;
+        cout<<"Opcion : ";
         cin>>menu;
       switch (menu) {
         case 1:
-            cout<<"1. Ingresa proceso: "<<endl;
-            cin>>pros>>prio;
+            //cout<<"1. Ingresa proceso: "<<endl;
+            cout<<"\tIngrese Proceso : ";cin>>pros;
+            cout<<"\tIngrese Prioridad : ";cin>>prio;
             A.AddE(pros,prio);
             A.tiempo(1);
           break;
@@ -169,12 +175,4 @@ int main()
             break;
       }
     }
-
-      /*A.AddE(1,23);
-      A.AddE(2,25);
-      A.AddE(3,4);
-      A.AddE(4,65);
-      A.AddE(5,65);
-      A.print_R(A.m_pHead);*/
-  return 0;
 }
